@@ -16,22 +16,12 @@ class KonsumenController extends Controller
      */
     public function index(Request $request)
     {
-        // $konsumens = Konsumen::all();
-        // return view('konsumen.index',[
-        //     'konsumens' => $konsumens
-        // ]);
-        $konsumens = Konsumen::latest()->paginate(5);
-        return view('konsumen.index', compact('konsumens'))->with('i',(request()->input('page',1)-1)*5);
-
         $pagination = 5;
-        $konsumens = Konsumen::when($request->keyword, function ($query) use ($request) {
-            $query->where('name','like',"%{$request->keyword}%");
-        })->orderBy('created_at', 'desc')->paginate($pagination);
-
+        
         $konsumens = Konsumen::latest()->paginate(5);
         return view('konsumen.index',[
             'konsumens' => $konsumens
-        ]);
+        ])->with('i', ($request->input('page', 1) - 1) * $pagination);
     }
 
     /**
@@ -58,7 +48,8 @@ class KonsumenController extends Controller
         $konsumen->address = $request->address;
         $konsumen->save();
 
-        return redirect()->route('konsumen.index');
+        return redirect()->route('konsumen.index')
+            ->with('success','Data Berhasil Dibuat!');
     }
 
     /**
@@ -97,7 +88,7 @@ class KonsumenController extends Controller
         $konsumen = Konsumen::findOrFail($id);
         $konsumen->update($request->validated());
         return redirect()->route('konsumen.index')
-            ->with('success', 'Berhasil Diupdate');
+            ->with('success', 'Berhasil Diupdate!');
     }
 
     /**
@@ -112,9 +103,8 @@ class KonsumenController extends Controller
         $konsumen = Konsumen::findOrFail($id);
         $konsumen->delete();
         return redirect()->route('konsumen.index')
-            ->with('success', 'Berhasil Dihapus');
+            ->with('success', 'Berhasil Dihapus!');
     }
-
 
     public function search(Request $request)
     {

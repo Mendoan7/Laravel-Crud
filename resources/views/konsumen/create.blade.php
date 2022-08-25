@@ -10,28 +10,41 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-10">
                <form action="{{ route('konsumen.store') }}" method="POST">
                     @csrf
-                    <div class="w-full">
-                        <label class="text-gray-700 font-bold mb-2">
-                            NIK Konsumen
+                    <div class="mb-6">
+                        <label class="block">
+                            <span class="text-gray-700 font-bold mb-2">NIK KTP</span>
                         </label>
-                        <input <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
-                        type="text" name="nik">
+                        <input id="nik" type="text" name="nik" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('nik') border-red-500 @enderror">
+                        @error('nik')
+                        <div class="text-sm text-red-600">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-                        <label class="text-gray-700 font-bold mb-2">
-                            Nama
+                    <div class="mb-6">
+                        <label class="block">
+                            <span class="text-gray-700 font-bold mb-2">Nama Konsumen</span>
                         </label>
-                        <input <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                        <input id="name" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('name') border-red-500 @enderror" 
                         type="text" name="name">
+                        @error('name')
+                        <div class="text-sm text-red-600">{{ $message }}</div>
+                        @enderror
+                    </div>
                         
-                        <label class="text-gray-700 font-bold mb-2">
-                            Alamat
+                    <div class="mb-6">
+                        <label class="block">
+                            <span class="text-gray-700 font-bold mb-2">Alamat</span>
                         </label>
-                        <input <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" 
+                        <input id="address" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 @error('address') border-red-500 @enderror"" 
                         type="text" name="address">
+                        @error('address')
+                        <div class="text-sm text-red-600">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
                             Simpan
                         </button>
-                    </div>
                 </form>
             </div>
         </div>

@@ -40,7 +40,7 @@
                     </tr>
                     @forelse ($konsumens as $konsumen)
                     <tr>
-                        <td class="border px-4 py-2">{{ $konsumen->id }}</td>
+                        <td class="border px-4 py-2">{{ ++$i }}</td>
                         <td class="border px-4 py-2">{{ $konsumen->nik }}</td>
                         <td class="border px-4 py-2">{{ $konsumen->name }}</td>
                         <td class="border px-4 py-2">{{ $konsumen->address }}</td>
