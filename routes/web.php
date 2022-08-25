@@ -29,3 +29,5 @@ Route::middleware([
 });
 
 Route::resource('konsumen', KonsumenController::class)->middleware('auth:sanctum');
+
+Route::get('/search', [KonsumenController::class, 'search'])->name('search');

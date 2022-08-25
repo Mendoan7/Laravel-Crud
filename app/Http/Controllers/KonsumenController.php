@@ -20,6 +20,8 @@ class KonsumenController extends Controller
         // return view('konsumen.index',[
         //     'konsumens' => $konsumens
         // ]);
+        $konsumens = Konsumen::latest()->paginate(5);
+        return view('konsumen.index', compact('konsumens'))->with('i',(request()->input('page',1)-1)*5);
 
         $pagination = 5;
         $konsumens = Konsumen::when($request->keyword, function ($query) use ($request) {
@@ -50,40 +52,13 @@ class KonsumenController extends Controller
      */
     public function store(StoreKonsumenRequest $request)
     {
-        // $konsumen = new Konsumen;
-        // $konsumen->nik = $request->nik;
-        // $konsumen->name = $request->name;
-        // $konsumen->address = $request->address;
-        // $konsumen->save();
+        $konsumen = Konsumen::create($request->validated());
+        $konsumen->nik = $request->nik;
+        $konsumen->name = $request->name;
+        $konsumen->address = $request->address;
+        $konsumen->save();
 
-        // return redirect()->route('konsumen.index');
-
-        $this->validate($request, [
-            'nik' => 'required|string|max:16',
-            'name' => 'required',
-            'address' => 'required'
-        ]);
-
-        $konsumen = Konsumen::create([
-            'nik' => $request->nik,
-            'name' => $request->name,
-            'address' => $request->address,
-        ]);
-
-        if ($konsumen) {
-            return redirect()
-                ->route('konsumen.index')
-                ->with([
-                    'success' => 'Data Baru Berhasil Dibuat!!!'
-                ]);
-        } else {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with([
-                    'error' => 'Data Gagal Dibuat!!! '
-                ]);
-        }
+        return redirect()->route('konsumen.index');
     }
 
     /**
@@ -105,9 +80,6 @@ class KonsumenController extends Controller
      */
     public function edit($id)
     {
-        // return view('konsumen.edit', [
-        //     'konsumen' =>$konsumen
-        // ]);
         $konsumen = Konsumen::findOrFail($id);
         return view('konsumen.edit', compact('konsumen'));
     }
@@ -121,34 +93,11 @@ class KonsumenController extends Controller
      */
     public function update(UpdateKonsumenRequest $request, $id)
     {
-        $this->validate($request, [
-            'nik' => 'required|string|max:16',
-            'name' => 'required',
-            'address' => 'required'
-        ]);
 
         $konsumen = Konsumen::findOrFail($id);
-
-        $konsumen->update([
-            'nik' => $request->nik,
-            'name' => $request->name,
-            'address' => $request->address,
-        ]);
-
-        if ($konsumen) {
-            return redirect()
-                ->route('konsumen.index')
-                ->with([
-                    'success' => 'Data Berhasil di Update!!!'
-                ]);
-        } else {
-            return redirect()
-                ->back()
-                ->withInput()
-                ->with([
-                    'error' => 'Update Gagal!!!'
-                ]);
-        }
+        $konsumen->update($request->validated());
+        return redirect()->route('konsumen.index')
+            ->with('success', 'Berhasil Diupdate');
     }
 
     /**
@@ -162,19 +111,15 @@ class KonsumenController extends Controller
     {
         $konsumen = Konsumen::findOrFail($id);
         $konsumen->delete();
-        // return redirect()->route('konsumen.index');
-        if ($konsumen) {
-            return redirect()
-                ->route('konsumen.index')
-                ->with([
-                    'success' => 'Data Berhasil Dihapus !'
-                ]);
-        } else {
-            return redirect()
-                ->route('konsumen.index')
-                ->with([
-                    'error' => 'Data Gagal Dihapus !'
-                ]);
-        }
+        return redirect()->route('konsumen.index')
+            ->with('success', 'Berhasil Dihapus');
+    }
+
+
+    public function search(Request $request)
+    {
+        $keyword = $request->search;
+        $konsumens = Konsumen::where('name', 'like', "%" . $keyword . "%")->paginate(5);
+        return view('konsumen.index', compact('konsumens'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

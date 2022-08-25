@@ -24,7 +24,9 @@ class StoreKonsumenRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nik' => 'required|string|max:16',
+            'name' => 'required',
+            'address' => 'required'
         ];
     }
 }
