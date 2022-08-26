@@ -40,14 +40,14 @@ class KonsumenController extends Controller
 
     public function edit($id)
     {
-        $konsumen = Konsumen::findOrFail($id);
+        $konsumen = Konsumen::find($id);
         return view('konsumen.edit', compact('konsumen'));
     }
 
     public function update(UpdateKonsumenRequest $request, $id)
     {
 
-        $konsumen = Konsumen::findOrFail($id);
+        $konsumen = Konsumen::find($id);
         $konsumen->update($request->validated());
 
         return redirect()->route('konsumen.index')
@@ -56,7 +56,7 @@ class KonsumenController extends Controller
 
     public function destroy($id)
     {
-        $konsumen = Konsumen::findOrFail($id);
+        $konsumen = Konsumen::find($id);
         $konsumen->delete();
 
         return redirect()->route('konsumen.index')
