@@ -36,12 +36,10 @@
                     </svg>
                   </button>
           
-                  <button
-                    class="block px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring"
-                    type="button"
-                  >
-                    Create Post
-                  </button>
+                  <a href="{{ route('konsumen.create') }}" class="block px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring"
+                    type="button">
+                    Add Konsumen
+                </a>
                 </div>
               </div>
             </div>
