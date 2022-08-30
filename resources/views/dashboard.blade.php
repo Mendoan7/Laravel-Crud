@@ -1,14 +1,58 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+        <header>
+            <div class="max-w-screen-xl px-4 py-8 mx-auto sm:py-12 sm:px-6 lg:px-8">
+              <div class="sm:justify-between sm:items-center sm:flex">
+                <div class="text-center sm:text-left">
+                  <h1 class="text-2xl font-bold text-gray-900 sm:text-3xl">
+                    Welcome Back, Bisma!
+                  </h1>
+          
+                  <p class="mt-1.5 text-sm text-gray-500">
+                    Semangat untuk Hari Ini! 🎉
+                  </p>
+                </div>
+          
+                <div class="flex flex-col gap-4 mt-4 sm:flex-row sm:mt-0 sm:items-center">
+                  <button
+                    class="inline-flex items-center justify-center px-5 py-3 text-gray-500 transition border border-gray-200 rounded-lg hover:text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring"
+                    type="button"
+                  >
+                    <span class="text-sm font-medium"> View Website </span>
+          
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="w-4 h-4 ml-1.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </button>
+          
+                  <button
+                    class="block px-5 py-3 text-sm font-medium text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring"
+                    type="button"
+                  >
+                    Create Post
+                  </button>
+                </div>
+              </div>
+            </div>
+        </header>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
+                
+                
             </div>
         </div>
     </div>
